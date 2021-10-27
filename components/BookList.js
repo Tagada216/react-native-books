@@ -12,7 +12,7 @@ export default function BookList({imgUrl, bookTitle}) {
 
 const styles = StyleSheet.create({
     bookContainer:{
-        paddingLeft: 30,
+        padding: 20,
         flexDirection: 'row'
     },
     bookPicture:{
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     bookTitle:{
         paddingLeft:20,
         alignSelf:'center',
-        fontSize: 22,
+        fontSize: 18,
+        fontWeight:'bold'
     }
 })
