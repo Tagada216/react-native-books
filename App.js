@@ -53,7 +53,7 @@ export default function App() {
         <FlatList 
         data={bookList}
         renderItem={({item})=>(
-          <BookList bookTitle={item.volumeInfo.title}  ></BookList>
+          <BookList bookTitle={item.volumeInfo.title} imgUrl={item.volumeInfo.imageLinks.thumbnail} ></BookList>
         )}
         />
         
