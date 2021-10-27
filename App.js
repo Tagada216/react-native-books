@@ -7,16 +7,19 @@ import axios from 'axios';
 
 
 export default function App() {
-  const searchBook=  (search) => {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
-    .then((response) =>{
-      console.log(response.data.items)
-      setSearchlist(response.data.items)
-      setUserSearch('')
-    } )
-    .catch((err) => {
-      console.log(err)
-    })
+  const searchBook =  () => {
+    if(!userSearch !== ""){
+      axios.get(`https://www.googleapis.com/books/v1/volumes?q=${userSearch}`)
+      .then((response) =>{
+        
+        setbookList(response.data.items)
+        console.log(bookList)
+      } )
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+  
   }
   useEffect(() => {
     
@@ -29,9 +32,9 @@ export default function App() {
     {'Bebas': require('./assets/fonts/Bebas.ttf')}
   )
 
-  const [userSearch, setUserSearch]=useState('');
+  const [userSearch, setUserSearch]=useState("");
 
-  const [searchList, setSearchlist]=useState([]);
+  const [bookList, setbookList]=useState([]);
   
 
 
@@ -47,18 +50,17 @@ export default function App() {
         <View style={styles.headerContainer}>
           <Text style={styles.titlePage} >Mes Livres</Text>
         </View>
-        
         <FlatList 
-        data={searchList}
+        data={bookList}
         renderItem={({item})=>(
-          <BookList bookTitle={item.volumeInfo.title} imgUrl={item.volumeInfo.imageLinks.thumbnail} ></BookList>
+          <BookList bookTitle={item.volumeInfo.title}  ></BookList>
         )}
         />
         
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder='Rechercher un livre' value={userSearch} onChangeText={text =>setUserSearch(text) } />
           
-          <TouchableOpacity onPress={searchBook('harry')} >
+          <TouchableOpacity onPress={searchBook} >
             <FontAwesome style={styles.searchIcon} name="search" size={34} color="black" />
           </TouchableOpacity>
 
